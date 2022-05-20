@@ -1,4 +1,5 @@
 const { green, yellow, red } = require("colors/safe");
+const colors = [green, yellow, red];
 
 const isPrime = (number) => {
   if (number < 2) return false;
@@ -10,26 +11,32 @@ const isPrime = (number) => {
   return true;
 };
 
-
-let count = 1;
-
 const from = process.argv[2];
 const to = process.argv[3];
 
-for (let number = from; number <= to; number++) {
-  let colorer = green;
+if (isNaN(from) || isNaN(to)) {
+  console.error(red('Ошибка! В введенных параметрах отсутствует число!'));
+  process.exit();
+}
 
-  if (isPrime(number)) {
-    if (count % 2 === 0) {
-      colorer = yellow;
-      count ++;
-    } else if (count % 3 === 0) {
-      colorer = red;
-      count = 1;
-    } else {
-      count ++;
+
+const getColor = (number, colors) => {
+  let i = 0;
+  let checkPrime = 0;
+  for (let number = from; number <= to; number++) {
+    if (isPrime(number)) {
+      checkPrime++;
+      console.log(colors[i](number));
+      i++;
+      if (i === 3){
+        i = 0;
+      }
     }
-
-    console.log(colorer(number));
+  }
+  if (checkPrime === 0) {
+    console.error(red("В последовательности нет простых чисел!!!"));
   }
 }
+
+
+getColor(from, colors);
