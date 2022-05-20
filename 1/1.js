@@ -37,4 +37,5 @@ const getColor = (number, colors) => {
     console.error(red("В последовательности нет простых чисел!!!"));
   }
 }
+
 getColor(from, colors);
