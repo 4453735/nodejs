@@ -38,5 +38,4 @@ const getColor = (number, colors) => {
   }
 }
 
-
 getColor(from, colors);
